@@ -9,17 +9,23 @@ functions = [
     },
 
     {
-        "name": "goto_dir",
-        "description": "Given the full path to the directory, it will change the dir to the path.",
+        "name": "change_dir",
+        "description": "changes the dir to the given path, WORKS ONLY ON LOCAL filesystem.",
         "parameters": {
             "path": "string"
         },
     },
 
+    {
+        "name": "check_disk_size",
+        "description": "Returns the disk size",
+        "parameters": {},
+    },
+
 ]
 
 agent = Agent(available_functions=functions, verbose=True)
-task = "Update my server"
+task = "start the server on the ip 192.168.1.10"
 context = """
 """
 print(agent.execute(task, context))

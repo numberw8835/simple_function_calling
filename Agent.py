@@ -36,8 +36,11 @@ class Agent:
             Select the most suitable function and its parameters using the following schema:
             {json.dumps(schema, indent=2)}
 
-            If no function applies, return:
+            It's very IMPORTANT that IF THERE IS NO APPLICABLE FUNCTIONS
+            YOU MUST RETURN THIS:
             {json.dumps(null_schema, indent=2)}
+            
+            ONLY!!!!!!!!!
         """)
 
         if self.verbose:
@@ -66,21 +69,29 @@ class Agent:
             raise ValueError("Invalid parameter type.")
 
         # Optionally, validate parameters against the chosen function's expected schema here
-        # ...
+        validation_response = self._validate(task, response_json, context)
 
-        return response_json
+        if validation_response:
+            return response_json
+        else:
+            return None
+
+
 
     def _validate(self, task, llm_response, context=None):
         validation_schema = {
-            "answer": "yes"  # Default to assume relevance
+            "answer": "string",
+            "reason": "string"
         }
 
         prompt = dedent(f"""
             Context: {context if context else "None"}
+            
             Task: {task}
-            LLM Response: {llm_response}
+            
+            Response: {llm_response}
 
-            Was the LLM response relevant and appropriate for the task?
+            DOES THIS RESPONSE MAKE SENSE? WILL IT WORK?
 
             Answer using this schema:
             {json.dumps(validation_schema, indent=2)}
