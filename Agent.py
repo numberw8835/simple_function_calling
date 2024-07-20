@@ -7,6 +7,11 @@ class Agent:
     def __init__(self, llm="mistral", available_functions=None, verbose=False):
         self.verbose = verbose
         self.available_functions = available_functions or []  # Default to empty list
+        self.validator = Ollama(
+            model="llama3",
+            temperature=0.0,  # Set temperature based on desired determinism
+            format='json',
+        )
         self.agent = Ollama(
             model=llm,
             temperature=0.0,  # Set temperature based on desired determinism
@@ -46,7 +51,7 @@ class Agent:
         if self.verbose:
             print("Prompt:", prompt)
 
-        response = self.agent.invoke(prompt)
+        response = self.validator.invoke(prompt)
 
         if self.verbose:
             print("Raw Response:", response)  # Show unprocessed output for debugging

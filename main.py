@@ -4,12 +4,10 @@ from functions import functions
 import utils  # Import the utils module
 
 
-agent = Agent(available_functions=functions, verbose=True)
-task = "What's the weather in london?"
+agent = Agent(available_functions=functions, verbose=False)
+task = "What's the weather in Egypt?"
 context = ""
 llm_response = agent.execute(task, context)
-
-print(llm_response)
 
 if llm_response:
     function_name = llm_response["name"]
