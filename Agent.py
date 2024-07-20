@@ -76,43 +76,40 @@ class Agent:
         else:
             return None
 
-
-
     def _validate(self, task, llm_response, context=None):
         validation_schema = {
             "answer": "string",
-            "reason": "string"
         }
 
         prompt = dedent(f"""
             Context: {context if context else "None"}
-            
-            Task: {task}
-            
+            User's request: {task}
             Response: {llm_response}
 
-            DOES THIS RESPONSE MAKE SENSE? WILL IT WORK?
+            DOES THE RESPONSE MAKE SENSE OR NOT ONLY!!!!!!
 
             Answer using this schema:
             {json.dumps(validation_schema, indent=2)}
 
-            Only provide "yes" or "no" as the answer.
+            ONLY provide "yes" or "no" as the answer.
         """)
 
         if self.verbose:
-            print("Validation Prompt:", prompt)
+            print("Validation Prompt:\n", prompt)  # Print the prompt before invoking the model
 
         response = self.agent.invoke(prompt)
 
         try:
-            validation_result = json.loads(response)["answer"].lower()  # Convert to lowercase
-        except (json.JSONDecodeError, KeyError) as e:
-            raise ValueError(f"Invalid validation response: {e}")
+            validation_result = json.loads(response)
+            answer = validation_result["answer"].lower()  # Convert to lowercase
 
-        if validation_result not in ["yes", "no"]:
-            raise ValueError("Invalid validation answer. Must be 'yes' or 'no'.")
+            if answer not in ["yes", "no"]:
+                raise ValueError("Invalid validation answer. Must be 'yes' or 'no'.")
 
-        if self.verbose:
-            print("Validation Result:", validation_result)
+            if self.verbose:
+                print("Validation Result:", answer)
 
-        return validation_result == "yes"  # True if relevant, False otherwise
+            return answer == "yes"
+
+        except json.JSONDecodeError as e:
+            raise ValueError(f"Invalid JSON response from validation: {e}")
