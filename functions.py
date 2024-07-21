@@ -78,15 +78,14 @@ functions = [
     "name": "greet_user",
     "description": "Greets the user with welcome message.",
     "parameters": {
-        "name": "str"
+        "user_name": ""
       }
   },
   {
     "name": "reverse_string",
     "description": "Reverse string",
     "parameters": {
-      "input_string": "str"
+      "input_string": ""
     }
   }
-
 ]

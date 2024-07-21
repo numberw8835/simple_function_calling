@@ -133,36 +133,15 @@ def restart_pc():
     os.system('shutdown -r now')
 
 
-def get_weather(city: str) -> dict:
-    api_key = 'your_openweathermap_api_key'  # Replace with your actual API key
-    base_url = 'http://api.openweathermap.org/data/2.5/weather'
-
-    params = {
-        'q': city,
-        'appid': api_key,
-        'units': 'metric'  # You can change to 'imperial' for Fahrenheit
-    }
-
-    response = requests.get(base_url, params=params)
-
-    if response.status_code == 200:
-        return response.json()
-    else:
-        return {'error': f"Error {response.status_code}: {response.reason}"}
-
 def reverse_string(input_string: str) -> str:
     reversed_string = ''
     for char in input_string:
         reversed_string = char + reversed_string
-    print(reversed_string)
+    return reversed_string
 
-"""
-    --- GENERATED FUNCTIONS ---
-"""
-
-def greet_user(name):
+def greet_user(user_name):
     """
     A simple function that greets the user by asking for their name and then prints a welcome message using that name.
     """
 
-    print(f"Welcome, {name}!")
+    return f"Welcome, {user_name}!"
