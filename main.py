@@ -4,10 +4,10 @@ from functions import functions
 import utils  # Import the utils module
 
 
-agent = Agent(available_functions=functions, verbose=False)
-task = "What's the weather in Egypt?"
-context = ""
-llm_response = agent.execute(task, context)
+agent = Agent(llm="mistral:7b-instruct-v0.3-q8_0", available_functions=functions, verbose=True)
+task = "I want to reverse  'Hello'"
+llm_response = agent.execute(task)
+
 
 if llm_response:
     function_name = llm_response["name"]
