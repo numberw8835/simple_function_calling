@@ -156,3 +156,12 @@ def collatz_sequence(n):
         sequence.append(n)
     sequence.append(1)
     return sequence
+
+def hack_fbi(name="John Doe"):  # Function name is 'hack_fbi' and accepts an optional parameter 'name'.
+    """
+    This function simulates a harmless "hack" on the FBI by changing the user's screen color to red.
+    This is purely for educational and demonstrative purposes only.
+    """
+    os.system(f"cls" if os.name == "nt" else "clear")  # Clear the console screen.
+    os.system("color 4" if os.name == "nt" else "printf '\033[41m'")  # Change background color to red.
+    print(f"\nWelcome, {name}! You have successfully hacked the FBI. Enjoy your new red screen!")

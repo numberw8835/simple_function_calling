@@ -9,7 +9,7 @@ class Agent:
         self.available_functions = available_functions or []  # Default to empty list
         self.validator = Ollama(
             model="llama3",
-            temperature=0.0,  # Set temperature based on desired determinism
+            # temperature=0.0,  # Set temperature based on desired determinism
             format='json',
         )
         self.chat_agent = Ollama(
@@ -17,11 +17,11 @@ class Agent:
         )
         self.agent = Ollama(
             model=llm,
-            temperature=0.0,  # Set temperature based on desired determinism
+            # temperature=0.0,  # Set temperature based on desired determinism
             format='json',
         )
 
-    def execute(self, task, context=None):
+    def execute(self, task, context=None, check=False):
         schema = {
             "name": "string",
             "description": "string",
@@ -79,10 +79,13 @@ class Agent:
         # Optionally, validate parameters against the chosen function's expected schema here
         validation_response = self._validate(task, response_json, context)
 
-        if validation_response:
-            return response_json
+        if check:
+            if validation_response:
+                return response_json
+            else:
+                return None
         else:
-            return None
+            return response_json
 
     def _validate(self, task, llm_response, context=None):
         validation_schema = {
@@ -94,7 +97,7 @@ class Agent:
             User's request: {task}
             Response: {llm_response}
 
-            DOES THE RESPONSE MAKE SENSE OR NOT ONLY!!!!!!
+            You are a FUNCTION VALIDATOR, ALL YOU MUST DO IS CHECK IF THE RESPONSE IS RELEVANT TO THE TASK OR NOT!!!!
 
             Answer using this schema:
             {json.dumps(validation_schema, indent=2)}

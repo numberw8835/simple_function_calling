@@ -41,7 +41,7 @@ class Console:
         return subprocess.run(['uname', '-n'], stdout=subprocess.PIPE).stdout.decode('utf-8').strip()
 
     def execute(self, user_input):
-        agent = Agent(llm="mistral:7b-instruct-v0.3-q8_0", available_functions=functions)
+        agent = Agent(available_functions=functions)
         context = None  # Initialize context here for clarity
 
         for command, context in self._parse_input(user_input):
@@ -71,7 +71,6 @@ class Console:
                         "name": "string",
                         "description": "string",
                         "parameters": {
-                            "argument_name": "data_type"
                         },  # Initialize as empty dict
                     }
 
@@ -82,6 +81,18 @@ class Console:
                         After creating the function create it's json schema: {schema}
                         IT HAS TO STRICTLY FOLLOW THE SCHEMA FORMAT OR ELSE YOU WILL CRASH THE PROGRAM
                         FOLLOW THE SCHEMA {schema} ONLY !!!!!
+                        
+                        Note in the parameter the name of the argument has to be the exact same at the function
+                        because it will be run here:
+                        ```
+                                    if llm_response:
+                                        function_name, parameters = llm_response["name"], llm_response["parameters"]
+                                        try:
+                                            result = getattr(utils, function_name)(**parameters)
+                                            spinner.succeed(f"✅ Done! Result: {{result}}")
+                                        except (AttributeError, TypeError) as e:
+                                            spinner.fail(f"❌ Error: {{e}}")
+                        ```
                     """
                     spinner.succeed(agent.prompt(prompt))
                 spinner.stop()
