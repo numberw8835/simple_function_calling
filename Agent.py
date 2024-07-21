@@ -4,12 +4,12 @@ import json
 
 
 class Agent:
-    def __init__(self, llm="mistral", available_functions=None, verbose=False):
+    def __init__(self, llm="llama3", available_functions=None, verbose=False):
         self.verbose = verbose
         self.available_functions = available_functions or []  # Default to empty list
         self.validator = Ollama(
             model=llm,
-            temperature=0.0,  # Set temperature based on desired determinism
+            # temperature=0.0,  # Set temperature based on desired determinism
             format='json',
             system="You are an AI validator your job is to check the right tool was chosen for the task"
         )
@@ -18,7 +18,7 @@ class Agent:
         )
         self.agent = Ollama(
             model=llm,
-            temperature=0.0,  # Set temperature based on desired determinism
+            # temperature=0.0,  # Set temperature based on desired determinism
             format='json',
             system="You are an AI Agent your job is to pick the right tool for the task"
         )
@@ -93,7 +93,7 @@ class Agent:
 
     def _validate(self, task, llm_response, context=None):
         validation_schema = {
-            "answer": "string",
+            "answer": "",
         }
 
         prompt = dedent(f"""
