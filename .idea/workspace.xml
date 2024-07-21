@@ -4,9 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="4b06b26c-3516-4716-9a02-564adb9ff315" name="Changes" comment="Complete v1.1">
+    <list default="true" id="4b06b26c-3516-4716-9a02-564adb9ff315" name="Changes" comment="Complete v1.2">
       <change beforePath="$PROJECT_DIR$/Agent.py" beforeDir="false" afterPath="$PROJECT_DIR$/Agent.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/functions.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Console.py" beforeDir="false" afterPath="$PROJECT_DIR$/Console.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +134,15 @@
       <option name="project" value="LOCAL" />
       <updated>1721603429869</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="Complete v1.2">
+      <option name="closed" value="true" />
+      <created>1721603919974</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1721603919974</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -142,6 +150,7 @@
     <MESSAGE value="Better function calling" />
     <MESSAGE value="Complete v1" />
     <MESSAGE value="Complete v1.1" />
-    <option name="LAST_COMMIT_MESSAGE" value="Complete v1.1" />
+    <MESSAGE value="Complete v1.2" />
+    <option name="LAST_COMMIT_MESSAGE" value="Complete v1.2" />
   </component>
 </project>

@@ -8,17 +8,19 @@ class Agent:
         self.verbose = verbose
         self.available_functions = available_functions or []  # Default to empty list
         self.validator = Ollama(
-            model="llama3",
-            # temperature=0.0,  # Set temperature based on desired determinism
+            model=llm,
+            temperature=0.0,  # Set temperature based on desired determinism
             format='json',
+            system="You are an AI validator your job is to check the right tool was chosen for the task"
         )
         self.chat_agent = Ollama(
             model=llm,
         )
         self.agent = Ollama(
             model=llm,
-            # temperature=0.0,  # Set temperature based on desired determinism
+            temperature=0.0,  # Set temperature based on desired determinism
             format='json',
+            system="You are an AI Agent your job is to pick the right tool for the task"
         )
 
     def execute(self, task, context=None, check=False):
@@ -99,7 +101,7 @@ class Agent:
             User's request: {task}
             Response: {llm_response}
 
-            You are a FUNCTION VALIDATOR, ALL YOU MUST DO IS CHECK IF THE RESPONSE IS RELEVANT TO THE TASK OR NOT!!!!
+            CHECK IF THE RESPONSE IS RELEVANT TO THE TASK OR NOT!!!!
 
             Answer using this schema:
             {json.dumps(validation_schema, indent=2)}

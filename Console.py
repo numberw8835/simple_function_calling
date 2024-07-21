@@ -52,7 +52,7 @@ class Console:
             spinner = Halo(text='Processing...', spinner='dots')
             spinner.start()
 
-            llm_response = agent.execute(command, context)
+            llm_response = agent.execute(command, context, check=True)
 
             if llm_response:
                 function_name, parameters = llm_response["name"], llm_response["parameters"]
