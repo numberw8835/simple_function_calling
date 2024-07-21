@@ -87,5 +87,12 @@ functions = [
     "parameters": {
       "input_string": ""
     }
+  },
+  {
+      "name": "collatz_sequence",
+      "description": "Returns the Collatz sequence for a given number.",
+      "parameters": {
+          "n": "integer"
+      }
   }
 ]

@@ -12,6 +12,9 @@ class Agent:
             temperature=0.0,  # Set temperature based on desired determinism
             format='json',
         )
+        self.chat_agent = Ollama(
+            model=llm,
+        )
         self.agent = Ollama(
             model=llm,
             temperature=0.0,  # Set temperature based on desired determinism
@@ -118,3 +121,6 @@ class Agent:
 
         except json.JSONDecodeError as e:
             raise ValueError(f"Invalid JSON response from validation: {e}")
+
+    def prompt(self, prompt):
+        return self.chat_agent.invoke(prompt)

@@ -27,7 +27,7 @@ class Console:
     def _get_username(self):
         """Retrieves the current username."""
         return subprocess.run(['whoami'], stdout=subprocess.PIPE).stdout.decode('utf-8').strip()
-    
+
     def show_history(self):
         """Prints the command history."""
         if not self.history:
@@ -62,7 +62,29 @@ class Console:
                 except (AttributeError, TypeError) as e:
                     spinner.fail(f"❌ Error: {e}")
             else:
-                spinner.fail("❌ I don't have enough information to do that. Please try another query.")
+                spinner.fail("I don't have enough information to do that!")
+                user_in = input("Would you like to create it? (Y/n) ")
+
+                spinner.start()
+                if user_in.lower() == "y":
+                    schema = {
+                        "name": "string",
+                        "description": "string",
+                        "parameters": {
+                            "argument_name": "data_type"
+                        },  # Initialize as empty dict
+                    }
+
+                    prompt = f"""
+                        Create a python function this will complete this user's request: {command}
+                        Here is the context as well: {context}
+                        
+                        After creating the function create it's json schema: {schema}
+                        IT HAS TO STRICTLY FOLLOW THE SCHEMA FORMAT OR ELSE YOU WILL CRASH THE PROGRAM
+                        FOLLOW THE SCHEMA {schema} ONLY !!!!!
+                    """
+                    spinner.succeed(agent.prompt(prompt))
+                spinner.stop()
 
     def _parse_input(self, user_input):
         """Parse user input into (command, context) pairs, making context optional."""
@@ -73,5 +95,5 @@ class Console:
             command = parts[0].strip()
 
             # Context is optional, set to None if not provided
-            context = parts[1].strip() if len(parts) > 1 else None  
+            context = parts[1].strip() if len(parts) > 1 else None
             yield command, context
