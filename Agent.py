@@ -26,6 +26,7 @@ class Agent:
             "name": "string",
             "description": "string",
             "parameters": {},  # Initialize as empty dict
+            "reason": ""
         }
         null_schema = {
             "name": "NULL",
@@ -43,6 +44,7 @@ class Agent:
 
             Select the most suitable function and its parameters using the following schema:
             {json.dumps(schema, indent=2)}
+            provide a reason for why you chose this specific function.
 
             It's very IMPORTANT that IF THERE IS NO APPLICABLE FUNCTIONS
             YOU MUST RETURN THIS:

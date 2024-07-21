@@ -92,14 +92,14 @@ functions = [
         "name": "collatz_sequence",
         "description": "Returns the Collatz sequence for a given number.",
         "parameters": {
-            "n": "integer"
+            "n": ""
         }
     },
     {
         "name": "hack_fbi",
         "description": "Simulates a harmless 'hack' on the FBI by changing the user's screen color to red.",
         "parameters": {
-            "name": "string"
+            "name": ""
         }
     }
 ]
