@@ -38,7 +38,7 @@ class Agent:
 
         # Construct a clear prompt with better formatting
         prompt = dedent(f"""
-            Context: {context if context else "None"}
+            {"Context: " + context if context else ""}
             Task: {task}
 
             Available functions:
@@ -97,7 +97,7 @@ class Agent:
         }
 
         prompt = dedent(f"""
-            Context: {context if context else "None"}
+            {"Context: " + context if context else ""}
             User's request: {task}
             Response: {llm_response}
 
