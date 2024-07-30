@@ -4,7 +4,7 @@ import json
 
 
 class Agent:
-    def __init__(self, llm="llama3", available_functions=None, verbose=False):
+    def __init__(self, llm="llama3.1", available_functions=None, verbose=False):
         self.verbose = verbose
         self.available_functions = available_functions or []  # Default to empty list
         self.validator = Ollama(
